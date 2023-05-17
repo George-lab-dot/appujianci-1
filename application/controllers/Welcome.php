@@ -39,9 +39,9 @@ class Welcome extends CI_Controller
     public function tampil()
     
     {
-        $nama = $_SESSION['nama'];
-        $nim = $_SESSION['nim'];
-        $umur = $_SESSION['umur'];
+        $nama = $this->input->post('nama');
+        $nim = $this->input->post('nim');
+        $umur = $this->input->post('umur');
         $status = '';
 
         if ($umur >= 0 && $umur <= 10) {
@@ -54,8 +54,6 @@ class Welcome extends CI_Controller
             $status = 'Tua';
         }
 
-        session_unset();
-        session_destroy();
         $blade = new Blade(VIEWPATH, APPPATH . 'cache');
         echo $blade->make('tampil', ['nama' => $nama, 'nim' => $nim, 'umur' => $umur, 'status' => $status])->render();
     }
